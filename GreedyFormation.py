@@ -150,25 +150,29 @@ for formation in list_formation:
     #Check if squad is valid for the formation
     if (formation.forward <= len(squad.forward) and formation.midfielder <= len(squad.midfielder) and formation.defender <= len(squad.defender)):
         # Add Score
+        i = 0
         for player in squad.forward:
-            i = 0
             if (i <= formation.forward):
                 formation.addScore(player.getPoint())
                 i += 1
+
+        i = 0
         for player in squad.midfielder:
-            i = 0
             if (i <= formation.midfielder):
                 formation.addScore(player.getPoint())
                 i += 1  
+
+        i = 0
         for player in squad.defender:
-            i = 0
             if (i <= formation.defender):
                 formation.addScore(player.getPoint())
                 i += 1
+                
         formation.addScore(squad.goalkeeper[0].getPoint())
-
         if (formation.score > best_formation.score):
-            best_formation = formation
+            best_formation = Formation(formation.defender, formation.midfielder, formation.forward)
+            best_formation.addScore(formation.score)
+
     else:
         continue
 
